@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<header>
+    <meta charset="UTF-8">
+    <title>ajax post</title>
+
+</header>
+
+<body>
+
+    <label>Usuario:</label>
+    <input type="text" id="usuario" name="usuario">
+    <label>Password:</label>
+    <input type="password" id="password" name="password">
+    <button id="btn">Enviar petición AJAX</button>
+    <div id="contenedor"></div>
+
+    <script>
+        var usuario = document.getElementById("usuario");
+        var password = document.getElementById("password");
+
+        function enviarPeticion() {
+            var objeto = new XMLHttpRequest();
+            objeto.open('POST', 'backend.php', true);
+            objeto.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            objeto.onreadystatechange = function () {
+                if (objeto.readyState == 4 && objeto.status == 200) {
+                    document.getElementById('contenedor').innerHTML = objeto.responseText;
+                }
+            }
+            objeto.send('username=' + usuario.value + '&password=' + password.value);
+        }
+
+        window.onload = function () {
+            var boton = document.getElementById("btn");
+            boton.onclick = function () {
+                enviarPeticion();
+            }
+        }
+
+    </script>
+
+</body >
+
+</html >

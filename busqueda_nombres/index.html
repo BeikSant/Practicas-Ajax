@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="UTF-8">
+    <title>Ajax y PHP</title>
+    <head>
+        <script>
+            function crearHTMLHttpRequest(){
+                var xmlHttp;
+                if(window.XMLHttpRequest){
+                    xmlHttp = new XMLHttpRequest();
+                }
+                return xmlHttp;
+            }
+
+            function mostrarInformacion(nombre){
+                var xmlHttp = crearHTMLHttpRequest();
+                xmlHttp.onreadystatechange = function(){
+                    if(xmlHttp.readyState == 4 && xmlHttp.status == 200){
+                        document.getElementById("resultado").innerHTML = xmlHttp.responseText;
+                    }
+                }
+                xmlHttp.open("GET", "obtener_nombre.php?nombre="+nombre,true);
+                xmlHttp.send();
+            }
+
+        </script>
+    </head>
+
+    <body>
+        <h2>Mis Clientes</h2>
+        <form id="formulario">
+            <label>Ingrese el nombre de un cliente:</label>
+            <input type="text" name="nombre">
+            <input type="button" id="enviar" value="Enviar" onclick="mostrarInformacion(nombre.value)">
+        </form>
+        <div id="resultado">No hay nada</div>
+    </body>
+</html>
