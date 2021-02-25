@@ -3,43 +3,59 @@
 <header>
     <meta charset="UTF-8">
     <title>ajax post</title>
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 </header>
 
 <body>
 
-    <label>Usuario:</label>
-    <input type="text" id="usuario" name="usuario">
-    <label>Password:</label>
-    <input type="password" id="password" name="password">
-    <button id="btn">Enviar petición AJAX</button>
-    <div id="contenedor"></div>
+    <div class="card text-center">
+        <div class="card-header">
+            <h2>Post Ajax</h2>
+        </div>
+        <div class="card-body">
+            <label>Usuario:</label>
+            <input type="text" id="usuario" name="usuario">
+            <label>Password:</label>
+            <input type="password" id="password" name="password">
+            <button id="btn">Enviar petición AJAX</button>
+            <div id="contenedor"></div>
+        </div>
+        <div class="card-footer text-muted">
+            <p><Strong>UNIVERSIDAD NACIONAL DE LOJA</Strong></p>
+            <p><Strong>Estudiante:</Strong> Beiker Santorum</p>
+            <p><Strong>Carrera:</Strong> Computacion</p>
+            <p><Strong>Materia:</Strong> Desarrollo Basado en Plataformas</p>
+            <p><Strong>Curso:</Strong> 5º A</p>
+        </div>
+    </div>
 
-    <script>
-        var usuario = document.getElementById("usuario");
-        var password = document.getElementById("password");
+    
+</body>
 
-        function enviarPeticion() {
-            var objeto = new XMLHttpRequest();
-            objeto.open('POST', 'backend.php', true);
-            objeto.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            objeto.onreadystatechange = function () {
-                if (objeto.readyState == 4 && objeto.status == 200) {
-                    document.getElementById('contenedor').innerHTML = objeto.responseText;
-                }
+</html>
+
+<script>
+    var usuario = document.getElementById("usuario");
+    var password = document.getElementById("password");
+
+    function enviarPeticion() {
+        var objeto = new XMLHttpRequest();
+        objeto.open('POST', 'backend.php', true);
+        objeto.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        objeto.onreadystatechange = function () {
+            if (objeto.readyState == 4 && objeto.status == 200) {
+                document.getElementById('contenedor').innerHTML = objeto.responseText;
             }
-            objeto.send('username=' + usuario.value + '&password=' + password.value);
         }
+        objeto.send('username=' + usuario.value + '&password=' + password.value);
+    }
 
-        window.onload = function () {
-            var boton = document.getElementById("btn");
-            boton.onclick = function () {
-                enviarPeticion();
-            }
+    window.onload = function () {
+        var boton = document.getElementById("btn");
+        boton.onclick = function () {
+            enviarPeticion();
         }
+    }
 
-    </script>
-
-</body >
-
-</html >
+</script>
